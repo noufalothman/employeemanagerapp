@@ -80,6 +80,14 @@
              <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL" required>
           </div>
             <div class="form-group">
+
+              <label for="Role">Role</label>
+              <select>
+              <option *ngFor="let R of Role"  value="Role" id="Role">{{R}}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
             <input type="radio" id="Active"  ngModel name="Active"
                    value="true" class="form-control">
             <label for="Active">Active</label>
@@ -132,6 +140,14 @@
                  <label for="phone">Image URL</label>
                  <input type="text" ngModel="{{editEmployee?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL">
               </div>
+             <div >
+               <input type="radio" id="Active"  ngModel name="Active"
+                      value="true">
+               <label for="Active">Active</label>
+               <input type="radio" id="NotActive"    ngModel name="Active"
+                      value="false" >
+               <label for="NotActive">Not Active</label>
+             </div>
               <div class="modal-footer">
                  <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
                  <button (click)="onUpdateEmloyee(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>

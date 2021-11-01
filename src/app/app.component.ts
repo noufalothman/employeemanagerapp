@@ -6,6 +6,7 @@ import { EmployeeService } from './employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,6 +16,9 @@ export class AppComponent implements OnInit {
   public employees: Employee[] = [];
   public editEmployee ?: Employee;
   public deleteEmployee ?: Employee;
+  public Role : String[];
+  public Roles : String[] = ["UI" , "UX" , "Java"] ;
+
 
   constructor(private employeeService: EmployeeService){}
 
@@ -23,10 +27,18 @@ export class AppComponent implements OnInit {
   }
 
   public getEmployees(): void {
+  this.employeeService.getRole().subscribe(
+            (response: String[]) => {
+            console.log(response);},
+            (error: HttpErrorResponse) => {
+             alert(error.message);
+                    }
+                     );
     this.employeeService.getEmployee().subscribe(
       (response: Employee[]) => {
         this.employees = response;
         console.log(this.employees);
+
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -35,10 +47,13 @@ export class AppComponent implements OnInit {
   }
 
   public onAddEmloyee(addForm: NgForm): void {
+
     document.getElementById('add-employee-form')?.click();
     this.employeeService.addEmployee(addForm.value).subscribe(
       (response: Employee) => {
         console.log(response);
+         console.log(addForm.value);
+
         this.getEmployees();
         addForm.reset();
       },
